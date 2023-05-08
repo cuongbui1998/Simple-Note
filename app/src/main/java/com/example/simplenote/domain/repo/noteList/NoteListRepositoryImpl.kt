@@ -24,7 +24,7 @@ class NoteListRepositoryImpl @Inject constructor(private val remoteService: Fire
                     listNote.add(note)
                 }
                 val result = listNote.apply {
-                    sortByDescending { it?.date }
+                    sortByDescending { it?.timestamp }
                 }.filter { it?.author == author }
                 trySendBlocking(NetworkResponse.Success(result))
             }
@@ -47,7 +47,7 @@ class NoteListRepositoryImpl @Inject constructor(private val remoteService: Fire
                     val note = postSnapshot.getValue(Note::class.java)
                     listNote.add(note)
                 }
-                listNote.sortByDescending { it?.date }
+                listNote.sortByDescending { it?.timestamp }
                 trySendBlocking(NetworkResponse.Success(listNote))
             }
 

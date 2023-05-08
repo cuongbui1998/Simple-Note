@@ -14,7 +14,7 @@ class CreateNewNoteViewModel @Inject constructor(private val createNewNoteUseCas
         createNewNoteUseCase(
             Note(
                 content = content,
-                date = System.currentTimeMillis(),
+                timestamp = System.currentTimeMillis(),
                 author = UserManager.userName
             )
         )

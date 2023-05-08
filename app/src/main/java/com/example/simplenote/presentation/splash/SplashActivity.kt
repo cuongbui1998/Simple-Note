@@ -7,6 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import com.example.simplenote.presentation.login.LoginActivity
 import com.example.simplenote.presentation.noteList.NoteListActivity
 import com.example.simplenote.utils.UserManager
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class SplashActivity : AppCompatActivity() {
 
@@ -16,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
         setContent {
             MaterialTheme {}
         }
+        Firebase.database.setPersistenceEnabled(true)
         checkUser()
     }
 

@@ -3,33 +3,28 @@ package com.example.simplenote.presentation.noteList
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplenote.R
 import com.example.simplenote.data.Note
-import com.example.simplenote.utils.RadioButtonItem
 import com.example.simplenote.presentation.createNewNote.CreateNewNoteActivity
+import com.example.simplenote.utils.RadioButtonItem
 import com.example.simplenote.utils.UserManager
 import com.example.simplenote.utils.addEmptyLines
 import com.example.simplenote.utils.formatLastModifiedDate
@@ -135,7 +130,7 @@ class NoteListActivity : AppCompatActivity() {
                     .padding(start = 15.dp, end = 15.dp, top = 5.dp)
                     .fillMaxWidth()
             ) {
-                model?.date?.let {
+                model?.timestamp?.let {
                     Text(
                         text = formatLastModifiedDate(Date(it)),
                         color = Color.Gray,
