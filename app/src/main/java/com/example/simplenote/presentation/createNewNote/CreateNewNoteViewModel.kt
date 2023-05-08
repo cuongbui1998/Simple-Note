@@ -11,7 +11,7 @@ import javax.inject.Inject
 class CreateNewNoteViewModel @Inject constructor(private val createNewNoteUseCase: CreateNewNoteUseCase) :
     ViewModel() {
     fun createNewNote(content: String) {
-        createNewNoteUseCase.invoke(
+        createNewNoteUseCase(
             Note(
                 content = content,
                 date = System.currentTimeMillis(),

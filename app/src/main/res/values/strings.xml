@@ -4,4 +4,6 @@
     <string name="ok">OK</string>
     <string name="enter_note_here">Enter note here</string>
     <string name="written_by">written by %s</string>
+    <string name="written_by_me">written by me</string>
+    <string name="all_note">all notes</string>
 </resources>

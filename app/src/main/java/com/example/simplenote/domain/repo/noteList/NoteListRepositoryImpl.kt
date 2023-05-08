@@ -38,4 +38,26 @@ class NoteListRepositoryImpl @Inject constructor(private val remoteService: Fire
             remoteService.removeGetNoteListener(listener)
         }
     }
+
+    override fun getAllNote(): Flow<NetworkResponse<List<Note?>>> = callbackFlow {
+        val listener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val listNote: MutableList<Note?> = mutableListOf()
+                for (postSnapshot in dataSnapshot.children) {
+                    val note = postSnapshot.getValue(Note::class.java)
+                    listNote.add(note)
+                }
+                listNote.sortByDescending { it?.date }
+                trySendBlocking(NetworkResponse.Success(listNote))
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                trySendBlocking(NetworkResponse.Error(Throwable("Cancel")))
+            }
+        }
+        remoteService.getNoteList(listener)
+        awaitClose {
+            remoteService.removeGetNoteListener(listener)
+        }
+    }
 }

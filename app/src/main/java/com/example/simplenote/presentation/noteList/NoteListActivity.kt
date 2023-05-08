@@ -3,26 +3,32 @@ package com.example.simplenote.presentation.noteList
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplenote.R
 import com.example.simplenote.data.Note
+import com.example.simplenote.utils.RadioButtonItem
 import com.example.simplenote.presentation.createNewNote.CreateNewNoteActivity
 import com.example.simplenote.utils.UserManager
 import com.example.simplenote.utils.addEmptyLines
@@ -48,6 +54,7 @@ class NoteListActivity : AppCompatActivity() {
     @Composable
     fun NoteListLayout() {
         val context = LocalContext.current
+        var type by remember { mutableStateOf(RadioButtonType.WrittenByMe) }
         Scaffold(
             floatingActionButton = {
                 FloatingActionButton(
@@ -65,15 +72,39 @@ class NoteListActivity : AppCompatActivity() {
             },
             content = { padding ->
                 val listNote by viewModel.listNote.collectAsState()
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding)
-                ) {
-                    items(listNote) { model ->
-                        ListRow(model = model)
+                Column(Modifier.padding(padding)) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
+                    ) {
+                        RadioButtonItem(
+                            modifier = Modifier.padding(bottom = 10.dp),
+                            selected = type == RadioButtonType.WrittenByMe,
+                            text = stringResource(id = R.string.written_by_me),
+                            onClick = {
+                                type = RadioButtonType.WrittenByMe
+                                UserManager.userName?.let { viewModel.getNoteList(it) }
+                            })
+                        RadioButtonItem(
+                            selected = type == RadioButtonType.AllNotes,
+                            text = stringResource(id = R.string.all_note),
+                            onClick = {
+                                type = RadioButtonType.AllNotes
+                                viewModel.getAllNote()
+                            })
+
+                    }
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+                        items(listNote) { model ->
+                            ListRow(model = model)
+                        }
                     }
                 }
+
             }
         )
     }
@@ -133,4 +164,9 @@ class NoteListActivity : AppCompatActivity() {
         }
     }
 
+}
+
+enum class RadioButtonType {
+    WrittenByMe,
+    AllNotes,
 }
