@@ -3,6 +3,7 @@ package com.example.simplenote.presentation.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -60,8 +61,19 @@ class LoginActivity : AppCompatActivity() {
                     modifier = Modifier.padding(10.dp)
                 )
                 Button(onClick = {
-                    viewModel.login(text.text)
-                    context.startActivity(NoteListActivity.intentFor(context))
+                    if (text.text.isBlank()) {
+                        Toast.makeText(
+                            context,
+                            getString(R.string.please_enter_your_user_name),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        viewModel.login(text.text)
+                        context.startActivity(
+                            NoteListActivity.intentFor(context)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        )
+                    }
                 }) {
                     Text(text = stringResource(id = R.string.ok))
                 }

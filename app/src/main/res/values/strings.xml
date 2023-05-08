@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cuong Note</string>
     <string name="enter_user_name">Enter user name</string>
+    <string name="please_enter_your_user_name">Please enter your user name</string>
     <string name="ok">OK</string>
     <string name="enter_note_here">Enter note here</string>
     <string name="written_by">written by %s</string>

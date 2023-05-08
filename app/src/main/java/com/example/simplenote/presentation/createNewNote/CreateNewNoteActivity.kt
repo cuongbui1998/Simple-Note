@@ -43,6 +43,7 @@ class CreateNewNoteActivity : AppCompatActivity() {
                 FloatingActionButton(
                     onClick = {
                         viewModel.createNewNote(text.text)
+                        finish()
                     },
                     shape = RoundedCornerShape(16.dp),
                 ) {
