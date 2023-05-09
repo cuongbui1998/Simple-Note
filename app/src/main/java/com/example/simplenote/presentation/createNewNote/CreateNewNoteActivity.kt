@@ -3,6 +3,7 @@ package com.example.simplenote.presentation.createNewNote
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,8 @@ class CreateNewNoteActivity : AppCompatActivity() {
         setContent {
             CreateNewNoteLayout()
         }
+
+        observeData()
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +46,6 @@ class CreateNewNoteActivity : AppCompatActivity() {
                 FloatingActionButton(
                     onClick = {
                         viewModel.createNewNote(text.text)
-                        finish()
                     },
                     shape = RoundedCornerShape(16.dp),
                 ) {
@@ -69,6 +71,20 @@ class CreateNewNoteActivity : AppCompatActivity() {
                 )
             }
         )
+    }
+
+    private fun observeData() {
+        viewModel.createNoteSuccess.observe(this) {
+            if (it == true) {
+                finish()
+            } else {
+                Toast.makeText(
+                    baseContext,
+                    getString(R.string.error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     companion object {

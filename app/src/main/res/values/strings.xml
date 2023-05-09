@@ -7,4 +7,5 @@
     <string name="written_by">written by %s</string>
     <string name="written_by_me">written by me</string>
     <string name="all_note">all notes</string>
+    <string name="error">Error</string>
 </resources>
