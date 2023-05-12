@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "980951089903",
+    "project_id": "simple-note-26bff",
+    "storage_bucket": "simple-note-26bff.appspot.com",
+    "firebase_url": "https://simple-note-26bff-default-rtdb.asia-southeast1.firebasedatabase.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980951089903:android:ddb5b18cf3601e1734d11a",
+        "android_client_info": {
+          "package_name": "com.example.simplenote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980951089903-s00gi0o71nat0137ct83a1uk9obs997i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx4vcFe9PBVWh7JD2rn05FGETuESwdVN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980951089903-s00gi0o71nat0137ct83a1uk9obs997i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
